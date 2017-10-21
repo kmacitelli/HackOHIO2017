@@ -13,6 +13,8 @@ namespace HackOHIO2017.Data
 
        public DbSet<City> Cities {get;set;}
 
+       public DbSet<HackOHIO2017.Models.Business> Business { get; set; }
+
 
     }
 }

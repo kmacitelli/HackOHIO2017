@@ -11,34 +11,15 @@ using System;
 namespace HackOHIO.Migrations
 {
     [DbContext(typeof(BusinessDbContext))]
-    partial class BusinessDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171021200350_Businesses")]
+    partial class Businesses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
                 .HasAnnotation("ProductVersion", "2.0.0-rtm-26452");
-
-            modelBuilder.Entity("HackOHIO2017.Models.Business", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Address");
-
-                    b.Property<string>("City");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("State");
-
-                    b.Property<int>("Zip");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Business");
-                });
 
             modelBuilder.Entity("HackOHIO2017.Models.City", b =>
                 {

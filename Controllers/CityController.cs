@@ -18,5 +18,10 @@ namespace HackOHIO2017.Controllers
         {
             return context.Cities;
         }
+
+        public IActionResult Index(){
+            var city = context.Cities.FirstOrDefault();
+            return View(context);
+        }
     }
 }
