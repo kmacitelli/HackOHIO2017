@@ -16,6 +16,7 @@ namespace HackOHIO2017.Models
 
         public string State { get; set; }
 
+        public virtual IEnumerable<Business> Businesses { get; set; }
 
         public virtual IEnumerable<Business> Businesses { get; set; }
 
