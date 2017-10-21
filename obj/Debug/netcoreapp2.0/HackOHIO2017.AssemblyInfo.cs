@@ -9,6 +9,10 @@ using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("HackOHIO2017")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+<<<<<<< HEAD
+=======
+[assembly: System.Reflection.AssemblyDescriptionAttribute("Package Description")]
+>>>>>>> 66e3aefb6cebcfd9e84c5f73c6c9a6b86f4de251
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("HackOHIO2017")]
