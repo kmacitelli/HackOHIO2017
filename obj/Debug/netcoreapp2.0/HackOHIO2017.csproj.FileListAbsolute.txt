@@ -1,0 +1,10 @@
+C:\Users\jared\Desktop\HackOhio\HackOHIO2017\bin\Debug\netcoreapp2.0\HackOHIO2017.deps.json
+C:\Users\jared\Desktop\HackOhio\HackOHIO2017\bin\Debug\netcoreapp2.0\HackOHIO2017.runtimeconfig.json
+C:\Users\jared\Desktop\HackOhio\HackOHIO2017\bin\Debug\netcoreapp2.0\HackOHIO2017.runtimeconfig.dev.json
+C:\Users\jared\Desktop\HackOhio\HackOHIO2017\bin\Debug\netcoreapp2.0\HackOHIO2017.dll
+C:\Users\jared\Desktop\HackOhio\HackOHIO2017\bin\Debug\netcoreapp2.0\HackOHIO2017.pdb
+C:\Users\jared\Desktop\HackOhio\HackOHIO2017\obj\Debug\netcoreapp2.0\HackOHIO2017.csproj.CoreCompileInputs.cache
+C:\Users\jared\Desktop\HackOhio\HackOHIO2017\obj\Debug\netcoreapp2.0\HackOHIO2017.AssemblyInfoInputs.cache
+C:\Users\jared\Desktop\HackOhio\HackOHIO2017\obj\Debug\netcoreapp2.0\HackOHIO2017.AssemblyInfo.cs
+C:\Users\jared\Desktop\HackOhio\HackOHIO2017\obj\Debug\netcoreapp2.0\HackOHIO2017.dll
+C:\Users\jared\Desktop\HackOhio\HackOHIO2017\obj\Debug\netcoreapp2.0\HackOHIO2017.pdb
