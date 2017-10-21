@@ -22,14 +22,21 @@ namespace HackOHIO2017.Controllers
             return View();
         }
 
-        public IActionResult Resources()
+        public IActionResult Investors()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "Your application description page.";
 
             return View();
         }
 
-        public IActionResult Links()
+        public IActionResult Realty()
+        {
+            ViewData["Message"] = "Your application description page.";
+
+            return View();
+        }
+
+        public IActionResult Resources()
         {
             ViewData["Message"] = "Your contact page.";
 
