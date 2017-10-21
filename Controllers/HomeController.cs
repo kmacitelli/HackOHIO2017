@@ -29,7 +29,7 @@ namespace HackOHIO2017.Controllers
             return View();
         }
 
-        public IActionResult Realty()
+        public IActionResult Locations()
         {
             ViewData["Message"] = "Your application description page.";
 
