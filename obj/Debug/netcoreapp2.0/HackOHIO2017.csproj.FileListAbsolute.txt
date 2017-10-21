@@ -1,0 +1,10 @@
+/home/kiera/Hackathon2017/HackOHIO2017/bin/Debug/netcoreapp2.0/HackOHIO2017.deps.json
+/home/kiera/Hackathon2017/HackOHIO2017/bin/Debug/netcoreapp2.0/HackOHIO2017.runtimeconfig.json
+/home/kiera/Hackathon2017/HackOHIO2017/bin/Debug/netcoreapp2.0/HackOHIO2017.runtimeconfig.dev.json
+/home/kiera/Hackathon2017/HackOHIO2017/bin/Debug/netcoreapp2.0/HackOHIO2017.dll
+/home/kiera/Hackathon2017/HackOHIO2017/bin/Debug/netcoreapp2.0/HackOHIO2017.pdb
+/home/kiera/Hackathon2017/HackOHIO2017/obj/Debug/netcoreapp2.0/HackOHIO2017.csproj.CoreCompileInputs.cache
+/home/kiera/Hackathon2017/HackOHIO2017/obj/Debug/netcoreapp2.0/HackOHIO2017.AssemblyInfoInputs.cache
+/home/kiera/Hackathon2017/HackOHIO2017/obj/Debug/netcoreapp2.0/HackOHIO2017.AssemblyInfo.cs
+/home/kiera/Hackathon2017/HackOHIO2017/obj/Debug/netcoreapp2.0/HackOHIO2017.dll
+/home/kiera/Hackathon2017/HackOHIO2017/obj/Debug/netcoreapp2.0/HackOHIO2017.pdb

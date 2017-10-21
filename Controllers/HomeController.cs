@@ -15,9 +15,23 @@ namespace HackOHIO2017.Controllers
             return View();
         }
 
-        public IActionResult About()
+        public IActionResult Businesses()
         {
             ViewData["Message"] = "Your application description page.";
+
+            return View();
+        }
+
+        public IActionResult Resources()
+        {
+            ViewData["Message"] = "Your contact page.";
+
+            return View();
+        }
+
+        public IActionResult Links()
+        {
+            ViewData["Message"] = "Your contact page.";
 
             return View();
         }
