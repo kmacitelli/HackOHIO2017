@@ -18,7 +18,5 @@ namespace HackOHIO2017.Models
 
         public virtual IEnumerable<Business> Businesses { get; set; }
 
-        public virtual IEnumerable<Business> Businesses { get; set; }
-
     }
 }
