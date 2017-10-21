@@ -11,8 +11,8 @@ using System;
 namespace HackOHIO.Migrations
 {
     [DbContext(typeof(BusinessDbContext))]
-    [Migration("20171021192224_Cities")]
-    partial class Cities
+    [Migration("20171021212545_0")]
+    partial class _0
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,28 @@ namespace HackOHIO.Migrations
             modelBuilder
                 .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
                 .HasAnnotation("ProductVersion", "2.0.0-rtm-26452");
+
+            modelBuilder.Entity("HackOHIO2017.Models.Business", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Address");
+
+                    b.Property<Guid>("CityId");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("State");
+
+                    b.Property<int>("Zip");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CityId");
+
+                    b.ToTable("Business");
+                });
 
             modelBuilder.Entity("HackOHIO2017.Models.City", b =>
                 {
@@ -33,6 +55,14 @@ namespace HackOHIO.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Cities");
+                });
+
+            modelBuilder.Entity("HackOHIO2017.Models.Business", b =>
+                {
+                    b.HasOne("HackOHIO2017.Models.City", "City")
+                        .WithMany("Businesses")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

@@ -22,7 +22,8 @@ namespace HackOHIO.Controllers_
         // GET: Business
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Business.ToListAsync());
+            var businessDbContext = _context.Business.Include(b => b.City);
+            return View(await businessDbContext.ToListAsync());
         }
 
         // GET: Business/Details/5
@@ -34,6 +35,7 @@ namespace HackOHIO.Controllers_
             }
 
             var business = await _context.Business
+                .Include(b => b.City)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (business == null)
             {
@@ -46,6 +48,7 @@ namespace HackOHIO.Controllers_
         // GET: Business/Create
         public IActionResult Create()
         {
+            ViewData["CityId"] = new SelectList(_context.City, "Id", "Id");
             return View();
         }
 
@@ -54,7 +57,7 @@ namespace HackOHIO.Controllers_
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Address,City,State,Zip")] Business business)
+        public async Task<IActionResult> Create([Bind("Id,Name,Address,State,Zip,CityId")] Business business)
         {
             if (ModelState.IsValid)
             {
@@ -63,6 +66,7 @@ namespace HackOHIO.Controllers_
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CityId"] = new SelectList(_context.City, "Id", "Id", business.CityId);
             return View(business);
         }
 
@@ -79,6 +83,7 @@ namespace HackOHIO.Controllers_
             {
                 return NotFound();
             }
+            ViewData["CityId"] = new SelectList(_context.City, "Id", "Id", business.CityId);
             return View(business);
         }
 
@@ -87,7 +92,7 @@ namespace HackOHIO.Controllers_
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,Address,City,State,Zip")] Business business)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,Address,State,Zip,CityId")] Business business)
         {
             if (id != business.Id)
             {
@@ -114,6 +119,7 @@ namespace HackOHIO.Controllers_
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CityId"] = new SelectList(_context.City, "Id", "Id", business.CityId);
             return View(business);
         }
 
@@ -126,6 +132,7 @@ namespace HackOHIO.Controllers_
             }
 
             var business = await _context.Business
+                .Include(b => b.City)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (business == null)
             {

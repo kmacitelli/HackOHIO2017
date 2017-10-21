@@ -27,7 +27,7 @@ namespace HackOHIO.Migrations
 
                     b.Property<string>("Address");
 
-                    b.Property<string>("City");
+                    b.Property<Guid>("CityId");
 
                     b.Property<string>("Name");
 
@@ -36,6 +36,8 @@ namespace HackOHIO.Migrations
                     b.Property<int>("Zip");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CityId");
 
                     b.ToTable("Business");
                 });
@@ -52,6 +54,14 @@ namespace HackOHIO.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Cities");
+                });
+
+            modelBuilder.Entity("HackOHIO2017.Models.Business", b =>
+                {
+                    b.HasOne("HackOHIO2017.Models.City", "City")
+                        .WithMany("Businesses")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

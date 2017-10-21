@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HackOHIO2017.Models
@@ -14,6 +16,8 @@ namespace HackOHIO2017.Models
 
         public string State { get; set; }
 
+
+        public virtual IEnumerable<Business> Businesses { get; set; }
 
     }
 }
