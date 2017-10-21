@@ -4,8 +4,25 @@
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
-
-/*@foreach (var business in Model.Businesses)
-{
-    <li>@Html.DisplayFor(businessItem => bussiness)</li>
-}*/
+<div class="row">
+    <div class="col-sm-6">
+        <h3>Business List</h3>
+        <!--List-->
+    </div>
+    <div class="col-sm-6">
+        <h3>Search</h3>
+        <div id="search">
+            <form>
+                <input type="text" placeholder="Search..." required>
+                <input type="button" value="Search">
+            </form>
+        </div>
+        <div>
+            <img src="https://maps.googleapis.com/maps/api/staticmap?center=Brooklyn+Bridge,New+York,NY&zoom=13&size=600x300&maptype=roadmap
+&markers=color:blue%7Clabel:S%7C40.702147,-74.015794&markers=color:green%7Clabel:G%7C40.711614,-74.012318
+&markers=color:red%7Clabel:C%7C40.718217,-73.998284
+&key=AIzaSyAIyWSKtU86Ht_krVAiD6UZBwjwQosYYYk"/>
+        </div>
+        <!--Map-->
+    </div>
+</div>
