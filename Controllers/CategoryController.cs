@@ -10,67 +10,63 @@ using HackOHIO2017.Models;
 
 namespace HackOHIO.Controllers
 {
-    public class CityController : Controller
+    public class CategoryController : Controller
     {
         private readonly BusinessDbContext _context;
 
-        public CityController(BusinessDbContext context)
+        public CategoryController(BusinessDbContext context)
         {
             _context = context;
         }
 
-
-
-
-
-        // GET: City
+        // GET: Category
         public async Task<IActionResult> Index()
         {
-            return View(await _context.City.ToListAsync());
+            return View(await _context.Categories.OrderBy(c => c.Name).ToListAsync());
         }
 
-        // GET: City/state/name
-        [HttpGet("[controller]/{state}/{name}")]
-        public async Task<IActionResult> Details(string state, string name)
+        // GET: Category/Details/5
+        public async Task<IActionResult> Details(Guid? id)
         {
-            if(state == null || name == null){
-                return await Index();
+            if (id == null)
+            {
+                return NotFound();
             }
-            var city = await _context.City.Include(x=>x.Businesses)
-                .SingleOrDefaultAsync(m => m.State.ToLower().Equals(state.ToLower()) && m.Name.ToLower().Equals(name.ToLower()));
-           
-           if(city != null){
-            return View(city);//Content(String.Format("City: {0}, State: {1}",city.Name, city.State));
-           }
-               return await Index(); 
+
+            var category = await _context.Categories
+                .SingleOrDefaultAsync(m => m.Id == id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            return View(category);
         }
 
-        
-
-        // GET: City/Create
+        // GET: Category/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: City/Create
+        // POST: Category/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,State")] City city)
+        public async Task<IActionResult> Create([Bind("Id,Name")] Category category)
         {
             if (ModelState.IsValid)
             {
-                city.Id = Guid.NewGuid();
-                _context.Add(city);
+                category.Id = Guid.NewGuid();
+                _context.Add(category);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(city);
+            return View(category);
         }
 
-        // GET: City/Edit/5
+        // GET: Category/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -78,22 +74,22 @@ namespace HackOHIO.Controllers
                 return NotFound();
             }
 
-            var city = await _context.City.SingleOrDefaultAsync(m => m.Id == id);
-            if (city == null)
+            var category = await _context.Categories.SingleOrDefaultAsync(m => m.Id == id);
+            if (category == null)
             {
                 return NotFound();
             }
-            return View(city);
+            return View(category);
         }
 
-        // POST: City/Edit/5
+        // POST: Category/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,State")] City city)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name")] Category category)
         {
-            if (id != city.Id)
+            if (id != category.Id)
             {
                 return NotFound();
             }
@@ -102,12 +98,12 @@ namespace HackOHIO.Controllers
             {
                 try
                 {
-                    _context.Update(city);
+                    _context.Update(category);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CityExists(city.Id))
+                    if (!CategoryExists(category.Id))
                     {
                         return NotFound();
                     }
@@ -118,10 +114,10 @@ namespace HackOHIO.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(city);
+            return View(category);
         }
 
-        // GET: City/Delete/5
+        // GET: Category/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -129,30 +125,30 @@ namespace HackOHIO.Controllers
                 return NotFound();
             }
 
-            var city = await _context.City
+            var category = await _context.Categories
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (city == null)
+            if (category == null)
             {
                 return NotFound();
             }
 
-            return View(city);
+            return View(category);
         }
 
-        // POST: City/Delete/5
+        // POST: Category/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var city = await _context.City.SingleOrDefaultAsync(m => m.Id == id);
-            _context.City.Remove(city);
+            var category = await _context.Categories.SingleOrDefaultAsync(m => m.Id == id);
+            _context.Categories.Remove(category);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CityExists(Guid id)
+        private bool CategoryExists(Guid id)
         {
-            return _context.City.Any(e => e.Id == id);
+            return _context.Categories.Any(e => e.Id == id);
         }
     }
 }

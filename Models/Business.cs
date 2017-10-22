@@ -18,9 +18,23 @@ namespace HackOHIO2017.Models
         public int Zip {get;set;}
 
 
+        public string Description {get;set;}
+
+        public string Site {get;set;}
+
+        public string Phone{get;set;}
+
+        public string Email {get;set;}
+
+
+
         public Guid CityId { get; set; }
 
         public virtual City City{ get; set; }
+
+        public Guid CategoryId{get;set;}
+
+        public virtual Category Category{get;set;}
 
     }
 }

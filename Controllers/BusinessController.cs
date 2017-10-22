@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using HackOHIO2017.Data;
 using HackOHIO2017.Models;
 
-namespace HackOHIO.Controllers_
+namespace HackOHIO.Controllers
 {
     public class BusinessController : Controller
     {
@@ -22,7 +22,7 @@ namespace HackOHIO.Controllers_
         // GET: Business
         public async Task<IActionResult> Index()
         {
-            var businessDbContext = _context.Business.Include(b => b.City);
+            var businessDbContext = _context.Business.Include(b => b.Category).Include(b => b.City);
             return View(await businessDbContext.ToListAsync());
         }
 
@@ -35,6 +35,7 @@ namespace HackOHIO.Controllers_
             }
 
             var business = await _context.Business
+                .Include(b => b.Category)
                 .Include(b => b.City)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (business == null)
@@ -48,7 +49,8 @@ namespace HackOHIO.Controllers_
         // GET: Business/Create
         public IActionResult Create()
         {
-            ViewData["CityId"] = new SelectList(_context.City, "Id", "Id");
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
+            ViewData["CityId"] = new SelectList(_context.City, "Id", "PrettyName");
             return View();
         }
 
@@ -57,7 +59,7 @@ namespace HackOHIO.Controllers_
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Address,State,Zip,CityId")] Business business)
+        public async Task<IActionResult> Create([Bind("Id,Name,Address,State,Zip,Description,Site,Phone,Email,CityId,CategoryId")] Business business)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +68,8 @@ namespace HackOHIO.Controllers_
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CityId"] = new SelectList(_context.City, "Id", "Id", business.CityId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", business.CategoryId);
+            ViewData["CityId"] = new SelectList(_context.City, "Id", "PrettyName", business.CityId);
             return View(business);
         }
 
@@ -83,7 +86,8 @@ namespace HackOHIO.Controllers_
             {
                 return NotFound();
             }
-            ViewData["CityId"] = new SelectList(_context.City, "Id", "Id", business.CityId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", business.CategoryId);
+            ViewData["CityId"] = new SelectList(_context.City, "Id", "PrettyName", business.CityId);
             return View(business);
         }
 
@@ -92,7 +96,7 @@ namespace HackOHIO.Controllers_
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,Address,State,Zip,CityId")] Business business)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,Address,State,Zip,Description,Site,Phone,Email,CityId,CategoryId")] Business business)
         {
             if (id != business.Id)
             {
@@ -119,7 +123,8 @@ namespace HackOHIO.Controllers_
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CityId"] = new SelectList(_context.City, "Id", "Id", business.CityId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", business.CategoryId);
+            ViewData["CityId"] = new SelectList(_context.City, "Id", "PrettyName", business.CityId);
             return View(business);
         }
 
@@ -132,6 +137,7 @@ namespace HackOHIO.Controllers_
             }
 
             var business = await _context.Business
+                .Include(b => b.Category)
                 .Include(b => b.City)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (business == null)
