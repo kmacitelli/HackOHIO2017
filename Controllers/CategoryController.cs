@@ -19,6 +19,11 @@ namespace HackOHIO.Controllers
             _context = context;
         }
 
+
+        public IActionResult CategoryList(){
+            return Json(_context.Categories);
+        }
+
         // GET: Category
         public async Task<IActionResult> Index()
         {
