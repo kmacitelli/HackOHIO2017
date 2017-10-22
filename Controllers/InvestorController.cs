@@ -10,67 +10,67 @@ using HackOHIO2017.Models;
 
 namespace HackOHIO.Controllers
 {
-    public class CityController : Controller
+    public class InvestorController : Controller
     {
         private readonly BusinessDbContext _context;
 
-        public CityController(BusinessDbContext context)
+        public InvestorController(BusinessDbContext context)
         {
             _context = context;
         }
 
-
-
-
-
-        // GET: City
+        // GET: Investor
         public async Task<IActionResult> Index()
         {
-            return View(await _context.City.ToListAsync());
+            var businessDbContext = _context.Investor.Include(i => i.City);
+            return View(await businessDbContext.ToListAsync());
         }
 
-        // GET: City/state/name
-        [HttpGet("[controller]/{state}/{name}")]
-        public async Task<IActionResult> Details(string state, string name)
+        // GET: Investor/Details/5
+        public async Task<IActionResult> Details(Guid? id)
         {
-            if(state == null || name == null){
-                return await Index();
+            if (id == null)
+            {
+                return NotFound();
             }
-            var city = await _context.City.Include(x=>x.Businesses)
-                .SingleOrDefaultAsync(m => m.State.ToLower().Equals(state.ToLower()) && m.Name.ToLower().Equals(name.ToLower()));
-           
-           if(city != null){
-            return View(city);//Content(String.Format("City: {0}, State: {1}",city.Name, city.State));
-           }
-               return await Index(); 
+
+            var investor = await _context.Investor
+                .Include(i => i.City)
+                .SingleOrDefaultAsync(m => m.Id == id);
+            if (investor == null)
+            {
+                return NotFound();
+            }
+
+            return View(investor);
         }
 
-        
-
-        // GET: City/Create
+        // GET: Investor/Create
         public IActionResult Create()
         {
+            ViewData["CityId"] = new SelectList(_context.City, "Id", "PrettyName");
             return View();
         }
 
-        // POST: City/Create
+        // POST: Investor/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,State")] City city)
+        public async Task<IActionResult> Create([Bind("Id,Name,Email,Phone,Description,Address,Zip,CityId,Site")] Investor investor)
         {
             if (ModelState.IsValid)
             {
-                city.Id = Guid.NewGuid();
-                _context.Add(city);
+                investor.Id = Guid.NewGuid();
+                _context.Add(investor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(city);
+            ViewData["CityId"] = new SelectList(_context.City, "Id", "PrettyName", investor.CityId);
+            return View(investor);
         }
 
-        // GET: City/Edit/5
+        // GET: Investor/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -78,22 +78,23 @@ namespace HackOHIO.Controllers
                 return NotFound();
             }
 
-            var city = await _context.City.SingleOrDefaultAsync(m => m.Id == id);
-            if (city == null)
+            var investor = await _context.Investor.SingleOrDefaultAsync(m => m.Id == id);
+            if (investor == null)
             {
                 return NotFound();
             }
-            return View(city);
+            ViewData["CityId"] = new SelectList(_context.City, "Id", "PrettyName", investor.CityId);
+            return View(investor);
         }
 
-        // POST: City/Edit/5
+        // POST: Investor/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,State")] City city)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,Email,Phone,Description,Address,Zip,CityId,Site")] Investor investor)
         {
-            if (id != city.Id)
+            if (id != investor.Id)
             {
                 return NotFound();
             }
@@ -102,12 +103,12 @@ namespace HackOHIO.Controllers
             {
                 try
                 {
-                    _context.Update(city);
+                    _context.Update(investor);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CityExists(city.Id))
+                    if (!InvestorExists(investor.Id))
                     {
                         return NotFound();
                     }
@@ -118,10 +119,11 @@ namespace HackOHIO.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(city);
+            ViewData["CityId"] = new SelectList(_context.City, "Id", "PrettyName", investor.CityId);
+            return View(investor);
         }
 
-        // GET: City/Delete/5
+        // GET: Investor/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -129,30 +131,31 @@ namespace HackOHIO.Controllers
                 return NotFound();
             }
 
-            var city = await _context.City
+            var investor = await _context.Investor
+                .Include(i => i.City)
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (city == null)
+            if (investor == null)
             {
                 return NotFound();
             }
 
-            return View(city);
+            return View(investor);
         }
 
-        // POST: City/Delete/5
+        // POST: Investor/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var city = await _context.City.SingleOrDefaultAsync(m => m.Id == id);
-            _context.City.Remove(city);
+            var investor = await _context.Investor.SingleOrDefaultAsync(m => m.Id == id);
+            _context.Investor.Remove(investor);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CityExists(Guid id)
+        private bool InvestorExists(Guid id)
         {
-            return _context.City.Any(e => e.Id == id);
+            return _context.Investor.Any(e => e.Id == id);
         }
     }
 }

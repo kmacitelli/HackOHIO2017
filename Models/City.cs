@@ -16,7 +16,14 @@ namespace HackOHIO2017.Models
 
         public string State { get; set; }
 
+        public virtual string PrettyName => String.Format("{0}, {1}", Name, State);
+
+        public virtual IEnumerable<Investor> Investors {get;set;}
+
         public virtual IEnumerable<Business> Businesses { get; set; }
+
+
+
 
     }
 }

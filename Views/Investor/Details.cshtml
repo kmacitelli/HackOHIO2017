@@ -1,4 +1,4 @@
-@model HackOHIO2017.Models.Business
+@model HackOHIO2017.Models.Investor
 
 @{
     ViewData["Title"] = "Details";
@@ -7,7 +7,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Business</h4>
+    <h4>Investor</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -17,34 +17,10 @@
             @Html.DisplayFor(model => model.Name)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Address)
+            @Html.DisplayNameFor(model => model.Email)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.State)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.State)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Zip)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Zip)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Site)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Site)
+            @Html.DisplayFor(model => model.Email)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Phone)
@@ -53,16 +29,28 @@
             @Html.DisplayFor(model => model.Phone)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayNameFor(model => model.Description)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Email)
+            @Html.DisplayFor(model => model.Description)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Category)
+            @Html.DisplayNameFor(model => model.Address)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Category.Id)
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Zip)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Zip)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Site)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Site)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.City)
